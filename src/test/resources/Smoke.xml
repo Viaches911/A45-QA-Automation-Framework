@@ -13,8 +13,7 @@
 <!--            </class>-->
                         <class name="LoginTests">
                             <methods>
-                                <include name="loginValidEmailPasswordTest" />
-                                <include name="loginValidEmailEmptyPasswordTest" />
+                                <include name="LoginEmptyEmailPasswordTest" />
                             </methods>
                         </class>
         </classes>
