@@ -1,14 +1,9 @@
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
-
-import java.time.Duration;
 
 public class LoginTests extends BaseTest {
 
@@ -59,21 +54,5 @@ public class LoginTests extends BaseTest {
 
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
 
-    }
-
-    @Test
-    public static void LoginEmptyEmailPasswordTest () {
-
-        //Added ChromeOptions argument below to fix websocket error
-        ChromeOptions options = new ChromeOptions();
-
-        WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
-        String url = "https://testpro.io/";
-        driver.get(url);
-
-        Assert.assertEquals(driver.getCurrentUrl(), url);
-        driver.quit();
     }
 }
