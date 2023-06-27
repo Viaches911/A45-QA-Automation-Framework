@@ -59,7 +59,7 @@ public class BaseTest {
 //        driver = new FirefoxDriver();
 
         threadDriver = new ThreadLocal<>(); // make sure to have this line before the assigning the driver variable
-        driver = pickBrowser(System.getProperty("browser"));
+        driver = pickBrowser("chrome");
         threadDriver.set(driver);
 
         getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
