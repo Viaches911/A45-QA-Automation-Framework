@@ -6,13 +6,13 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class Homework15 extends BaseTest {
+public class HomeWork15 extends BaseTest {
     @Test
     public static void LoginEmptyEmailPasswordTest() {
 
         //Added ChromeOptions argument below to fix websocket error
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-otigins=*");
+        options.addArguments("--remote-allow-origins=*");
 
         WebDriver driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
