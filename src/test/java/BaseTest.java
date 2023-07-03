@@ -52,9 +52,9 @@ public class BaseTest {
     @Parameters({"BaseURL"})
     public void launchBrowser(String BaseURL) throws MalformedURLException {
         //      Added ChromeOptions argument below to fix websocket error
-//        ChromeOptions options = new ChromeOptions();
-//        options.addArguments("--remote-allow-origins=*");
-//        driver = new ChromeDriver(options);
+//       ChromeOptions options = new ChromeOptions();
+//       options.addArguments("--remote-allow-origins=*");
+//       driver = new ChromeDriver(options);
 
 //        driver = new FirefoxDriver();
 
