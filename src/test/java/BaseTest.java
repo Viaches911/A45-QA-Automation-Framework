@@ -29,12 +29,12 @@ public class BaseTest {
     public ThreadLocal<WebDriver> threadDriver = null;
     public static WebDriverWait wait = null;
     public static Actions actions = null;
-    public static String url = "https://testpro.io/";
+    public static String url = "";
 
     @BeforeSuite
     static void setupClass() {
 
-//        WebDriverManager.chromedriver().setup();
+       WebDriverManager.chromedriver().setup();
 //        WebDriverManager.firefoxdriver().setup();
 
     }
@@ -54,9 +54,11 @@ public class BaseTest {
         //      Added ChromeOptions argument below to fix websocket error
 //       ChromeOptions options = new ChromeOptions();
 //       options.addArguments("--remote-allow-origins=*");
+//       options.addArguments("--disable-notifications");
+
 //       driver = new ChromeDriver(options);
 
-//        driver = new FirefoxDriver();
+//       driver = new FirefoxDriver();
 
         threadDriver = new ThreadLocal<>(); // make sure to have this line before the assigning the driver variable
         driver = pickBrowser("chrome");
