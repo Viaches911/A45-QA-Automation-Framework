@@ -29,7 +29,7 @@ public class BaseTest {
     public ThreadLocal<WebDriver> threadDriver = null;
     public static WebDriverWait wait = null;
     public static Actions actions = null;
-    public static String url = "";
+    public static String url = "https://testpro.io/";
 
     @BeforeSuite
     static void setupClass() {
