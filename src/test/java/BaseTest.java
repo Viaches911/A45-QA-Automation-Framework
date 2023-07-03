@@ -170,6 +170,7 @@ public class BaseTest {
     }
 
     public static String generateRandomName() {
+
         return UUID.randomUUID().toString().replace("-", "");
     }
 
