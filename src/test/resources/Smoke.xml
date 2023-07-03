@@ -17,6 +17,11 @@
                                 <include name="loginValidEmailEmptyPasswordTest" />
                             </methods>
                         </class>
+                       <class name="HomeWork16">
+                           <methods>
+                               <include name="registrationNavigation" />
+                           </methods>
+                       </class>
         </classes>
     </test>
 </suite>
