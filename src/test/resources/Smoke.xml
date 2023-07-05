@@ -14,7 +14,6 @@
                         <class name="LoginTests">
                             <methods>
                                 <include name="loginValidEmailPasswordTest" />
-                                <include name="loginValidEmailEmptyPasswordTest" />
                             </methods>
                         </class>
             <class name="HomeWork17">

@@ -1,3 +1,4 @@
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class HomeWork17 extends BaseTest {
@@ -10,6 +11,12 @@ public class HomeWork17 extends BaseTest {
         provideEmail("demo@class.com");
         providePassword("te$t$tudent");
         clickSubmit();
+        searchSong("Pluto");
+        clickViewAllBtn();
+        selectFirstSongResult();
+        clickAddtoBtn();
+        choosePlaylist();
+        Assert.assertTrue (getNotificationText().contains(newSongAddedNotificationText));
 
 
     }

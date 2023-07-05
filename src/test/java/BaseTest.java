@@ -213,7 +213,41 @@ public class BaseTest {
     }
 
     public void searchSong (String songTitleKeyword) throws InterruptedException{
-        WebElement searchField
+        WebElement searchField = driver.findElement(By.cssSelector("div#serachForm input[type=search"));
+        searchField.sendKeys(songTitleKeyword);
+        Thread.sleep(2000);
+
+    }
+    public void clickViewAllBtn () throws InterruptedException {
+        WebElement viewAllSearchResult = driver.findElement(By.cssSelector("div.results section.songs h1 button"));
+        viewAllSearchResult.click();
+        Thread.sleep(2000);
+    }
+
+    public void selectFirstSongResult () throws InterruptedException {
+        WebElement firstSongResult = driver.findElement(By.cssSelector("section#songResultsWrapper tr.song-item td.title"));
+        firstSongResult.click();
+        Thread.sleep(2000);
+
+    }
+
+    public void clickAddtoBtn() throws InterruptedException {
+        WebElement addToBtn = driver.findElement(By.cssSelector("button.btn-add-to"));
+        addToBtn.click();
+        Thread.sleep(2000);
+    }
+
+    public void choosePlaylist() throws InterruptedException {
+        // We created a playlist named "Test Pro Playlist"
+        WebElement playlistElement = driver.findElement(By.xpath("//section[@id = 'songResultsWrapper']//li[contains(text),'Test Pro Playlist')]"));
+        playlistElement.click();
+        Thread.sleep(2000);
+
+    }
+
+    public String getNotificationText() {
+        WebElement notificationElement = driver.findElement(By.cssSelector("div.success.show"));
+        return notificationElement.getText();
 
     }
 }
