@@ -211,4 +211,9 @@ public class BaseTest {
         WebElement playlist = driver.findElement(By.cssSelector(".playlist:nth-child(3)"));
         actions.doubleClick(playlist).perform();
     }
+
+    public void searchSong (String songTitleKeyword) throws InterruptedException{
+        WebElement searchField
+
+    }
 }
