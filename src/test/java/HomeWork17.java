@@ -16,7 +16,11 @@ public class HomeWork17 extends BaseTest {
         selectFirstSongResult();
         clickAddtoBtn();
         choosePlaylist();
-        //Assert.assertTrue (getNotificationText().contains(newSongAddedNotificationText));
+        Assert.assertTrue (getNotificationText().contains(newSongAddedNotificationText));
+
+        //I created empty playlist "Test Playlist" on Koel website before testing.
+        //Song "Pluto" will be added to this playlist.
+        // Chrome will be launch in fullscreen mode for best demonstration.
 
 
     }

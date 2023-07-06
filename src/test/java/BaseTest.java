@@ -107,6 +107,7 @@ public class BaseTest {
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--remote-allow-origins=*");
                 options.addArguments("--disable-notifications");
+                options.addArguments("--start-fullscreen");
                 return driver = new ChromeDriver(options);
         }
     }
@@ -220,7 +221,7 @@ public class BaseTest {
 
     }
     public void clickViewAllBtn () throws InterruptedException {
-        WebElement viewAllSearchResult = driver.findElement(By.cssSelector("div.results section.songs h1 button"));
+        WebElement viewAllSearchResult = driver.findElement(By.cssSelector("div.results h1 > button"));
         viewAllSearchResult.click();
         Thread.sleep(2000);
     }
@@ -240,7 +241,7 @@ public class BaseTest {
 
     public void choosePlaylist() throws InterruptedException {
         // We created a playlist named "Test Playlist"
-        WebElement playlistElement = driver.findElement(By.cssSelector("#playlists > ul > li:nth-child(3) > a"));
+        WebElement playlistElement = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//li[contains(text(),'Test Playlist')]"));
         playlistElement.click();
         Thread.sleep(2000);
 
@@ -248,7 +249,6 @@ public class BaseTest {
 
     public String getNotificationText() {
         WebElement notificationElement = driver.findElement(By.cssSelector("div.success.show"));
-        // body > div.alertify-logs.top.right
         return notificationElement.getText();
 
     }
