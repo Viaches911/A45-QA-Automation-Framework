@@ -59,7 +59,7 @@ public class BaseTest {
 //        driver = new FirefoxDriver();
 
         threadDriver = new ThreadLocal<>(); // make sure to have this line before the assigning the driver variable
-        driver = pickBrowser(System.getProperty("browser"));
+        driver = pickBrowser("chrome");
         threadDriver.set(driver);
 
         getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -106,6 +106,7 @@ public class BaseTest {
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--remote-allow-origins=*");
+                options.addArguments("--disable-notifications");
                 return driver = new ChromeDriver(options);
         }
     }
@@ -213,7 +214,7 @@ public class BaseTest {
     }
 
     public void searchSong (String songTitleKeyword) throws InterruptedException{
-        WebElement searchField = driver.findElement(By.cssSelector("div#serachForm input[type=search"));
+        WebElement searchField = driver.findElement(By.cssSelector("div#searchForm input[type=search"));
         searchField.sendKeys(songTitleKeyword);
         Thread.sleep(2000);
 
@@ -238,8 +239,8 @@ public class BaseTest {
     }
 
     public void choosePlaylist() throws InterruptedException {
-        // We created a playlist named "Test Pro Playlist"
-        WebElement playlistElement = driver.findElement(By.xpath("//section[@id = 'songResultsWrapper']//li[contains(text),'Test Pro Playlist')]"));
+        // We created a playlist named "Test Playlist"
+        WebElement playlistElement = driver.findElement(By.cssSelector("#playlists > ul > li:nth-child(3) > a"));
         playlistElement.click();
         Thread.sleep(2000);
 
@@ -247,6 +248,7 @@ public class BaseTest {
 
     public String getNotificationText() {
         WebElement notificationElement = driver.findElement(By.cssSelector("div.success.show"));
+        // body > div.alertify-logs.top.right
         return notificationElement.getText();
 
     }
