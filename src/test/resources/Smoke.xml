@@ -6,22 +6,31 @@
     <test name="Example Test">
         <parameter name="BaseURL" value="https://qa.koel.app/"/>
         <classes>
-<!--            <class name="RandomTests">-->
-<!--                <methods>-->
-<!--                    <include name="actionMethods" />-->
-<!--                </methods>-->
-<!--            </class>-->
-                        <class name="LoginTests">
-                            <methods>
-                                <include name="loginValidEmailPasswordTest" />
-                                <include name="loginValidEmailEmptyPasswordTest" />
-                            </methods>
-                        </class>
-                       <class name="HomeWork16">
-                           <methods>
-                               <include name="registrationNavigation" />
-                           </methods>
-                       </class>
+
+            <class name="HomeWork15">
+                <methods>
+                    <include name="LoginEmptyEmailPasswordTest"/>
+                </methods>
+            </class>
+
+            <class name="HomeWork16">
+                <methods>
+                    <include name="registrationNavigation" />
+                </methods>
+            </class>
+
+            <class name="HomeWork17">
+                <methods>
+                    <include name="addSongToPlaylist" />
+                </methods>
+            </class>
+
+            <class name="HomeWork18">
+                <methods>
+                    <include name="playASongTest"/>
+                </methods>
+            </class>
+
         </classes>
     </test>
 </suite>
