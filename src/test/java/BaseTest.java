@@ -108,6 +108,9 @@ public class BaseTest {
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--remote-allow-origins=*");
+                options.addArguments("--disable-notifications");
+//                options.addArguments("--start-fullscreen");
+                options.addArguments("start-maximized");
                 return driver = new ChromeDriver(options);
         }
     }
@@ -213,5 +216,44 @@ public class BaseTest {
         // double click
         WebElement playlist = driver.findElement(By.cssSelector(".playlist:nth-child(3)"));
         actions.doubleClick(playlist).perform();
+    }
+
+    public void searchSong (String songTitleKeyword) throws InterruptedException{
+        WebElement searchField = driver.findElement(By.cssSelector("div#searchForm input[type=search"));
+        searchField.sendKeys(songTitleKeyword);
+        Thread.sleep(2000);
+
+    }
+    public void clickViewAllBtn () throws InterruptedException {
+        WebElement viewAllSearchResult = driver.findElement(By.cssSelector("div.results h1 > button"));
+        viewAllSearchResult.click();
+        Thread.sleep(2000);
+    }
+
+    public void selectFirstSongResult () throws InterruptedException {
+        WebElement firstSongResult = driver.findElement(By.cssSelector("section#songResultsWrapper tr.song-item td.title"));
+        firstSongResult.click();
+        Thread.sleep(2000);
+
+    }
+
+    public void clickAddtoBtn() throws InterruptedException {
+        WebElement addToBtn = driver.findElement(By.cssSelector("button.btn-add-to"));
+        addToBtn.click();
+        Thread.sleep(2000);
+    }
+
+    public void choosePlaylist() throws InterruptedException {
+        // We created a playlist named "Test Playlist"
+        WebElement playlistElement = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//li[contains(text(),'Test Playlist')]"));
+        playlistElement.click();
+        Thread.sleep(2000);
+
+    }
+
+    public String getNotificationText() {
+        WebElement notificationElement = driver.findElement(By.cssSelector("div.success.show"));
+        return notificationElement.getText();
+
     }
 }
