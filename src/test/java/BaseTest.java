@@ -107,7 +107,8 @@ public class BaseTest {
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--remote-allow-origins=*");
                 options.addArguments("--disable-notifications");
-                options.addArguments("--start-fullscreen");
+//                options.addArguments("--start-fullscreen");
+                options.addArguments("start-maximized");
                 return driver = new ChromeDriver(options);
         }
     }

@@ -20,7 +20,7 @@ public class HomeWork17 extends BaseTest {
 
         //I created empty playlist "Test Playlist" on Koel website before testing.
         //Song "Pluto" will be added to this playlist.
-        // Chrome will be launch in fullscreen mode for best demonstration.
+        // Chrome will be in maximized mode.
 
 
     }
