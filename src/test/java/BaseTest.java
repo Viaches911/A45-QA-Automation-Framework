@@ -214,4 +214,12 @@ public class BaseTest {
         WebElement playlist = driver.findElement(By.cssSelector(".playlist:nth-child(3)"));
         actions.doubleClick(playlist).perform();
     }
+
+    public void clickPlay() {
+        WebElement playNextButton = driver.findElement(By.xpath("//i[@data-testid='play-next-btn']"));
+        WebElement playButton = driver.findElement(By.xpath("//span[@data-testid='play-btn']"));
+
+        playNextButton.click();
+        playButton.click();
+    }
 }
