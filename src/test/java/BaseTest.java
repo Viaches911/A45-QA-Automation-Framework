@@ -34,7 +34,7 @@ public class BaseTest {
     @BeforeSuite
     static void setupClass() {
 
-//        WebDriverManager.chromedriver().setup();
+       WebDriverManager.chromedriver().setup();
 //        WebDriverManager.firefoxdriver().setup();
 
     }
@@ -52,14 +52,16 @@ public class BaseTest {
     @Parameters({"BaseURL"})
     public void launchBrowser(String BaseURL) throws MalformedURLException {
         //      Added ChromeOptions argument below to fix websocket error
-//        ChromeOptions options = new ChromeOptions();
-//        options.addArguments("--remote-allow-origins=*");
-//        driver = new ChromeDriver(options);
+//       ChromeOptions options = new ChromeOptions();
+//       options.addArguments("--remote-allow-origins=*");
+//       options.addArguments("--disable-notifications");
 
-//        driver = new FirefoxDriver();
+//       driver = new ChromeDriver(options);
+
+//       driver = new FirefoxDriver();
 
         threadDriver = new ThreadLocal<>(); // make sure to have this line before the assigning the driver variable
-        driver = pickBrowser(System.getProperty("browser"));
+        driver = pickBrowser("chrome");
         threadDriver.set(driver);
 
         getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -168,6 +170,7 @@ public class BaseTest {
     }
 
     public static String generateRandomName() {
+
         return UUID.randomUUID().toString().replace("-", "");
     }
 
