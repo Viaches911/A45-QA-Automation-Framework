@@ -108,6 +108,11 @@ public class BaseTest {
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--remote-allow-origins=*");
+                options.addArguments("start-maximized");
+                options.addArguments("--disable-notifications");
+                options.addArguments("--disable-extensions");
+                options.addArguments("disable-popup-blocking");
+
                 return driver = new ChromeDriver(options);
         }
     }
