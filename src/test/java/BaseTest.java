@@ -110,8 +110,8 @@ public class BaseTest {
                 options.addArguments("--remote-allow-origins=*");
                 options.addArguments("start-maximized");
                 options.addArguments("--disable-notifications");
-                options.addArguments("--disable-extensions");
-                options.addArguments("disable-popup-blocking");
+//                options.addArguments("--disable-extensions");
+//                options.addArguments("disable-popup-blocking");
 
                 return driver = new ChromeDriver(options);
         }
@@ -272,4 +272,19 @@ public class BaseTest {
         return soundBar.isDisplayed();
     }
 
+    public void openPlaylist() {
+        WebElement emptyPlaylist = driver.findElement(By.cssSelector(".playlist:nth-child(3)"));
+        emptyPlaylist.click();
+    }
+
+    public void clickDeletePlaylistBtn() throws InterruptedException {
+        WebElement deletePlaylist = driver.findElement(By.cssSelector(".btn-delete-playlist"));
+        deletePlaylist.click();
+        Thread.sleep(2000);
+    }
+
+    public String getDeletedPlaylistMsg() {
+        WebElement notificationMsg = driver.findElement(By.cssSelector("div.success.show"));
+        return notificationMsg.getText();
+    }
 }
