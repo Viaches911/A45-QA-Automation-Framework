@@ -71,6 +71,12 @@
                 </methods>
             </class>
 
+            <class name="HomeWork22">
+                <methods>
+                    <include name="renamePlaylist"/>
+                </methods>
+            </class>
+
         </classes>
     </test>
 </suite>
