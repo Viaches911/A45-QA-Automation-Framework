@@ -14,9 +14,8 @@ public class HomeWork22 extends BaseTest {
         HomePage homePage = new HomePage(driver);
 
         loginPage.login();
-        homePage.doubleClickPlaylist();
+        homePage.doubleClickFirstPlaylist();
         homePage.enterNewPlaylistName(playlistName);
-        Assert.assertTrue(homePage.doesPlaylistExist(playlistName));
-
+        Assert.assertTrue(homePage.doesPlaylistExists(playlistName));
     }
 }

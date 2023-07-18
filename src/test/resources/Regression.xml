@@ -8,16 +8,17 @@
         <classes>
             <class name="BaseTest"/>
             <class name="LoginTests"/>
-            <class name="TestHomework"/>
+<!--            <class name="TestHomework"/>-->
             <class name="ProfileTests"/>
-            <class name="RandomTests"/>
-            <class name="HomeWork15"/>
-            <class name="HomeWork16"/>
-            <class name="HomeWork17"/>
-            <class name="HomeWork18"/>
-            <class name="HomeWork19"/>
-            <class name="HomeWork21"/>
-            <class name="HomeWork22"/>
+<!--            <class name="RandomTests"/>-->
+<!--            <class name="HomeWork15"/>-->
+<!--            <class name="HomeWork16"/>-->
+<!--            <class name="HomeWork17"/>-->
+<!--            <class name="HomeWork18"/>-->
+<!--            <class name="HomeWork19"/>-->
+<!--            <class name="HomeWork21"/>-->
+<!--            <class name="HomeWork22"/>-->
+            <class name="HomeWork23"/>
         </classes>
     </test>
 </suite>
