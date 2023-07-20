@@ -1,8 +1,8 @@
 package pages;
-
-import org.openqa.selenium.*;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.By;
 
 public class HomePage extends BasePage {
 
@@ -12,18 +12,20 @@ public class HomePage extends BasePage {
     private WebElement playlistNameField;
     @FindBy(css = "img.avatar")
     private WebElement userAvatarIcon;
+    @FindBy(css = "div.success.show")
+    private WebElement popUpNotification;
 
     public HomePage(WebDriver givenDriver) {
         super(givenDriver);
     }
-    public HomePage doubleClickFirstPlaylist() {
-        actions.doubleClick(firstPlaylist).perform();
+    public HomePage doubleClickChoosePlaylist() {
+        doubleClick(firstPlaylist);
         return this;
     }
-    public HomePage enterNewPlaylistName(String newplaylistName) {
-        playlistNameField.sendKeys(newplaylistName);
+    public HomePage enterNewPlaylistName(String playlistName) {
+        playlistNameField.sendKeys(playlistName);
         playlistNameField.sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.BACK_SPACE));
-        playlistNameField.sendKeys(newplaylistName);
+        playlistNameField.sendKeys(playlistName);
         playlistNameField.sendKeys(Keys.ENTER);
         return this;
     }
@@ -31,9 +33,14 @@ public class HomePage extends BasePage {
         return userAvatarIcon;
     }
 
-    public boolean doesPlaylistExists(String newPlaylistName) {
-        By newPlaylist = By.xpath(String.format("//a[text()='%s']", newPlaylistName));
-        return findElement((WebElement) newPlaylist).isDisplayed();
+//    public boolean doesPlaylistExists(String playlistName) {
+//        By newPlaylist = By.xpath("//a[text()='"+playlistName+"']");
+//        return findElement(newPlaylist).isDisplayed();
+//    }
+
+    public String getPlaylistName() {
+        findElement(popUpNotification);
+        return findElement(firstPlaylist).getText();
     }
 
 

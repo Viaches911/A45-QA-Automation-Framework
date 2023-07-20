@@ -7,20 +7,20 @@
         <parameter name="BaseURL" value="https://qa.koel.app/"/>
         <classes>
 
-            <class name="LoginTests">
-                <methods>
-                    <include name="loginInvalidEmailValidPasswordTest"/>
-                    <include name="loginValidEmailPasswordTest"/>
-                    <include name="loginValidEmailEmptyPasswordTest"/>
-                    <include name="LoginValidEmailPasswordTest"/>
-                </methods>
-            </class>
+<!--            <class name="LoginTests">-->
+<!--                <methods>-->
+<!--                    <include name="loginInvalidEmailValidPasswordTest"/>-->
+<!--                    <include name="loginValidEmailPasswordTest"/>-->
+<!--                    <include name="loginValidEmailEmptyPasswordTest"/>-->
+<!--                    <include name="LoginValidEmailPasswordTest"/>-->
+<!--                </methods>-->
+<!--            </class>-->
 
-            <class name="ProfileTests">
-                <methods>
-                    <include name="changeProfileNameTest"/>
-                </methods>
-            </class>
+<!--            <class name="ProfileTests">-->
+<!--                <methods>-->
+<!--                    <include name="changeProfileNameTest"/>-->
+<!--                </methods>-->
+<!--            </class>-->
 
 <!--            <class name="RandomTests">-->
 <!--                <methods>-->

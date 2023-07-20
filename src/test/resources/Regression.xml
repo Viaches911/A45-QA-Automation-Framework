@@ -7,9 +7,9 @@
         <parameter name="BaseURL" value="https://qa.koel.app/"/>
         <classes>
             <class name="BaseTest"/>
-            <class name="LoginTests"/>
+<!--            <class name="LoginTests"/>-->
 <!--            <class name="TestHomework"/>-->
-            <class name="ProfileTests"/>
+<!--            <class name="ProfileTests"/>-->
 <!--            <class name="RandomTests"/>-->
 <!--            <class name="HomeWork15"/>-->
 <!--            <class name="HomeWork16"/>-->

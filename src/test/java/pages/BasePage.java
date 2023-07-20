@@ -30,5 +30,7 @@ public class BasePage {
     protected void contextClick(WebElement webElement) {
         actions.contextClick(findElement(webElement)).perform();
     }
+
+
 }
 
