@@ -16,7 +16,9 @@ import org.testng.annotations.*;
 
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URL;
 import java.time.Duration;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -94,8 +96,8 @@ public class BaseTest {
             case "grid-chrome":
                 caps.setCapability("browserName", "chrome");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
-//            case "cloud":
-//                return lambdaTest();
+            case "cloud":
+                return lambdaTest();
             default:
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions options = new ChromeOptions();
@@ -104,25 +106,25 @@ public class BaseTest {
         }
     }
 
+    public static WebDriver lambdaTest() throws MalformedURLException {
+    String username = "viacheslav.dzhilov";
+    String accessToken = "1BwNLD7xRLpZuD66zuXVz2i2H0IVaHn6M97T6fJ3l2KSMhU6NF";
+    String hubURL = "https://hub.lambdatest.com/wd/hub";
 
-//    public static WebDriver lambdaTest() throws MalformedURLException {
-//            String username = "khaledzamanqa";
-//            String accessToken = "e33oiUgYlTNRArFJpW8NCYZmvEzDi9jIQC6qvdHg4UOxL82EHd";
-//            String hubURL = "https://hub.lambdatest.com/wd/hub";
-//
-//        FirefoxOptions browserOptions = new FirefoxOptions();
-//        browserOptions.setPlatformName("Windows 10");
-//        browserOptions.setBrowserVersion("111.0");
-//        HashMap<String, Object> ltOptions = new HashMap<String, Object>();
-//            ltOptions.put("username", username);
-//            ltOptions.put("accessKey", accessToken);
-//            ltOptions.put("project", "Untitled");
-//            ltOptions.put("w3c", true);
-//            ltOptions.put("plugin", "java-testNG");
-//            browserOptions.setCapability("LT:Options", ltOptions);
-//
-//        return new RemoteWebDriver(new URL(hubURL), browserOptions);
-//    }
+    ChromeOptions browserOptions = new ChromeOptions();
+    browserOptions.setPlatformName("Windows 10");
+    browserOptions.setBrowserVersion("114.0");
+    HashMap<String, Object> ltOptions = new HashMap<String, Object>();
+    ltOptions.put("username", "viacheslav.dzhilov");
+    ltOptions.put("accessKey", "1BwNLD7xRLpZuD66zuXVz2i2H0IVaHn6M97T6fJ3l2KSMhU6NF");
+    ltOptions.put("project", "Untitled");
+    ltOptions.put("w3c", true);
+    ltOptions.put("plugin", "java-testNG");
+    browserOptions.setCapability("LT:Options", ltOptions);
+
+    return new RemoteWebDriver(new URL(hubURL), browserOptions);
+    }
+
     public static void navigateToPage() {
         driver.get(url);
     }
