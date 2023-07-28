@@ -22,7 +22,7 @@ import java.util.UUID;
 
 public class BaseTest {
     public static WebDriver driver = null;
-    public ThreadLocal<WebDriver> threadDriver = null;
+    public ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
     public static WebDriverWait wait = null;
     public static Actions actions = null;
     public static String url = "";
@@ -52,31 +52,27 @@ public class BaseTest {
 //       options.addArguments("--remote-allow-origins=*");
 //       driver = new ChromeDriver(options);
 
-//        threadDriver = new ThreadLocal<>(); // make sure to have this line before the assigning the driver variable
-//        driver = pickBrowser("chrome");
-//        threadDriver.set(driver);
-
 //        driver = new FirefoxDriver();
 
-        driver = pickBrowser(System.getProperty("browser"));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        actions = new Actions(driver);
+        threadDriver.set(pickBrowser(System.getProperty("browser")));
+
+        wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+        actions = new Actions(getDriver());
+
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         url = BaseURL;
         navigateToPage();
     }
 
     @AfterMethod//(enabled = false)
     public void closeBrowser() {
-//        getDriver().quit();
-//        threadDriver.remove();
-        driver.quit();
+        threadDriver.get().close();
+        threadDriver.remove();
     }
 
-//    public WebDriver getDriver() {
-////        return driver;
-//        return threadDriver.get();
-//    }
+    public WebDriver getDriver() {
+        return threadDriver.get();
+    }
 
     public static WebDriver pickBrowser(String browser) throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();

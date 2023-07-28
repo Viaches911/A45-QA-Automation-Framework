@@ -10,8 +10,8 @@ public class HomeWork22 extends BaseTest {
     public void renamePlaylist() {
         String playlistName = "Test Edited Playlist";
 
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
 
         loginPage.login();
         homePage.doubleClickChoosePlaylist();

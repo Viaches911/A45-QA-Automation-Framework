@@ -29,7 +29,7 @@ public class LoginPage extends BasePage {
         return this;
     }
     public LoginPage login() {
-        provideEmail("viacheslav.dzhilov@testpro.io");
+        provideEmail("demo@class.com");
         providePassword("te$t$tudent");
         clickSubmit();
         return this;
