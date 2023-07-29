@@ -24,7 +24,7 @@ import java.util.UUID;
 
 public class BaseTest {
     public static WebDriver driver = null;
-    public ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
+    public ThreadLocal<WebDriver> threadDriver = null;
     public static WebDriverWait wait = null;
     public static Actions actions = null;
     public static String url = "";
@@ -56,7 +56,9 @@ public class BaseTest {
 
 //        driver = new FirefoxDriver();
 
-        threadDriver.set(pickBrowser(System.getProperty("browser")));
+//        threadDriver = new ThreadLocal<>();
+        driver = pickBrowser(System.getProperty("browser"));
+//        threadDriver.set(driver);
 
         wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
         actions = new Actions(getDriver());
@@ -68,12 +70,13 @@ public class BaseTest {
 
     @AfterMethod//(enabled = false)
     public void closeBrowser() {
-        threadDriver.get().close();
-        threadDriver.remove();
+        getDriver().quit();
+//        threadDriver.remove();
     }
 
     public WebDriver getDriver() {
-        return threadDriver.get();
+        return driver;
+//        return threadDriver.get();
     }
 
     public static WebDriver pickBrowser(String browser) throws MalformedURLException {
@@ -96,7 +99,7 @@ public class BaseTest {
             case "grid-chrome":
                 caps.setCapability("browserName", "chrome");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
-            case "cloud":
+            case "lambda":
                 return lambdaTest();
             default:
                 WebDriverManager.chromedriver().setup();
