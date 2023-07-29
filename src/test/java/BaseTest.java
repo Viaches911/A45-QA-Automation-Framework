@@ -56,9 +56,9 @@ public class BaseTest {
 
 //        driver = new FirefoxDriver();
 
-//        threadDriver = new ThreadLocal<>();
+        threadDriver = new ThreadLocal<>();// make sure to have this line before the assigning the driver variable
         driver = pickBrowser(System.getProperty("browser"));
-//        threadDriver.set(driver);
+        threadDriver.set(driver);
 
         wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
         actions = new Actions(getDriver());
@@ -71,12 +71,12 @@ public class BaseTest {
     @AfterMethod//(enabled = false)
     public void closeBrowser() {
         getDriver().quit();
-//        threadDriver.remove();
+        threadDriver.remove();
     }
 
     public WebDriver getDriver() {
-        return driver;
-//        return threadDriver.get();
+//        return driver;
+        return threadDriver.get();
     }
 
     public static WebDriver pickBrowser(String browser) throws MalformedURLException {
