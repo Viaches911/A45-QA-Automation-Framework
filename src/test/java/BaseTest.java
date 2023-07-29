@@ -118,8 +118,8 @@ public class BaseTest {
     browserOptions.setPlatformName("Windows 10");
     browserOptions.setBrowserVersion("114.0");
     HashMap<String, Object> ltOptions = new HashMap<String, Object>();
-    ltOptions.put("username", "viacheslav.dzhilov");
-    ltOptions.put("accessKey", "1BwNLD7xRLpZuD66zuXVz2i2H0IVaHn6M97T6fJ3l2KSMhU6NF");
+    ltOptions.put("username", username);
+    ltOptions.put("accessKey", accessToken);
     ltOptions.put("project", "Untitled");
     ltOptions.put("w3c", true);
     ltOptions.put("plugin", "java-testNG");
