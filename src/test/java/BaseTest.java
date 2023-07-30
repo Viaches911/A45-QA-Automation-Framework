@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -58,27 +59,32 @@ public class BaseTest {
                 "Browser setup by Thread " + Thread.currentThread().getId() + " and Driver reference is : " + getThreadLocal());
 
     }
+//    Этот метод setUpBrowser() помечен аннотацией @BeforeMethod из TestNG и выполняется перед каждым тестовым методом.
+//    Он устанавливает браузер, настраивает его и открывает указанный baseURL. Он также выводит информацию о настройке браузера в консоль.
 
-    public static WebDriver pickBrowser(String browser) throws MalformedURLException {
-        DesiredCapabilities caps = new DesiredCapabilities();
-        String gridURL = "http://192.168.1.70:4444";
 
-        switch (browser){
+    public WebDriver pickBrowser(String browser) throws MalformedURLException {
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        String gridURL = "http://10.2.127.17:4444";
+
+        switch (browser) {
             case "firefox":
                 WebDriverManager.firefoxdriver().setup();
-                return driver = new FirefoxDriver();
-            case "MicrosoftEdge":
+                FirefoxOptions optionsFirefox = new FirefoxOptions();
+                optionsFirefox.addArguments("-private");
+                return driver = new FirefoxDriver(optionsFirefox);
+            case "edge":
                 WebDriverManager.edgedriver().setup();
                 return driver = new EdgeDriver();
-            case "grid-edge":
-                caps.setCapability("browserName", "MicrosoftEdge");
-                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
             case "grid-firefox":
-                caps.setCapability("browserName", "firefox");
-                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
+                capabilities.setCapability("browserName", "firefox");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), capabilities);
+            case "grid-edge":
+                capabilities.setCapability("browserName", "edge");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), capabilities);
             case "grid-chrome":
-                caps.setCapability("browserName", "chrome");
-                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
+                capabilities.setCapability("browserName", "chrome");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), capabilities);
             case "cloud":
                 return lambdaTest();
             default:
@@ -89,8 +95,9 @@ public class BaseTest {
                 return driver = new ChromeDriver(optionsChrome);
         }
     }
+//    Этот метод pickBrowser() выбирает и возвращает экземпляр WebDriver в зависимости от переданного параметра browser.
 
-    public static WebDriver lambdaTest() throws MalformedURLException {
+    public WebDriver lambdaTest() throws MalformedURLException {
     String username = "viacheslav.dzhilov";
     String accessToken = "1BwNLD7xRLpZuD66zuXVz2i2H0IVaHn6M97T6fJ3l2KSMhU6NF";
     String hubURL = "https://hub.lambdatest.com/wd/hub";
@@ -109,11 +116,18 @@ public class BaseTest {
     return new RemoteWebDriver(new URL(hubURL), browserOptions);
     }
 
+    //    Этот метод lambdaTest() возвращает экземпляр WebDriver для использования в удаленном тестировании с использованием сервиса LambdaTest.
+
     @AfterMethod
     public void tearDown() {
         THREAD_LOCAL.get().close();
         THREAD_LOCAL.remove();
     }
+
+    /*
+    Метод tearDown() выполняется после каждого метода тестирования (@AfterMethod),
+    и его целью является закрытие WebDriver и удаление его экземпляра из ThreadLocal.
+*/
 
 
     public static void navigateToPage() {
