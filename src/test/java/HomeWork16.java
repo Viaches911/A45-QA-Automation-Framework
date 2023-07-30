@@ -9,11 +9,11 @@ public class HomeWork16 extends BaseTest {
     @Test
     public void registrationNavigation()  {
 
-        WebElement registrationLink = getDriver().findElement(By.cssSelector("[id='hel']"));
+        WebElement registrationLink = getThreadLocal().findElement(By.cssSelector("[id='hel']"));
         registrationLink.click();
 
         String registrationUrl = "https://qa.koel.app/registration.php";
-        Assert.assertEquals(getDriver().getCurrentUrl(), registrationUrl);
+        Assert.assertEquals(getThreadLocal().getCurrentUrl(), registrationUrl);
 
     }
 }

@@ -6,20 +6,33 @@ import org.openqa.selenium.support.FindBy;
 
 public class HomePage extends BasePage {
 
+    @FindBy(css = ".avatar")
+    private WebElement userAvatarIcon;
     @FindBy(css = ".playlist:nth-child(3)")
     private WebElement firstPlaylist;
-    @FindBy(css = "[name='name']")
+    @FindBy(css = "input[name='name']")
     private WebElement playlistNameField;
-    @FindBy(css = "img.avatar")
-    private WebElement userAvatarIcon;
-    @FindBy(css = "div.success.show")
+    @FindBy(css = ".fa-plus-circle")
+    private WebElement addNewPlaylist;
+    @FindBy(css = ".btn-delete-playlist")
+    private WebElement deletePlaylistBtn;
+    @FindBy(css = ".show.success")
     private WebElement popUpNotification;
+    @FindBy(css = ".songs")
+    private WebElement allSongs;
+    @FindBy(css = "[data-testid='playlist-context-menu-create-simple']")
+    private WebElement chooseCreateNewPlaylist;
 
     public HomePage(WebDriver givenDriver) {
         super(givenDriver);
     }
-    public HomePage doubleClickChoosePlaylist() {
-        doubleClick(firstPlaylist);
+
+    public boolean getUserAvatar() {
+        return userAvatarIcon.isEnabled();
+    }
+
+    public HomePage chooseFirstPlaylist() {
+        firstPlaylist.click();
         return this;
     }
     public HomePage enterNewPlaylistName(String playlistName) {
@@ -29,19 +42,15 @@ public class HomePage extends BasePage {
         playlistNameField.sendKeys(Keys.ENTER);
         return this;
     }
-    public WebElement getUserAvatar () {
-        return userAvatarIcon;
+
+    public HomePage deletePlaylist() {
+        deletePlaylistBtn.click();
+        return this;
     }
 
-//    public boolean doesPlaylistExists(String playlistName) {
-//        By newPlaylist = By.xpath("//a[text()='"+playlistName+"']");
-//        return findElement(newPlaylist).isDisplayed();
-//    }
-
-    public String getPlaylistName() {
+    public boolean notificationText() {
         findElement(popUpNotification);
-        return findElement(firstPlaylist).getText();
+        return popUpNotification.isDisplayed();
     }
-
 
 }

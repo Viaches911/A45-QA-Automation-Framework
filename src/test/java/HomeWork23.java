@@ -11,15 +11,15 @@ public class HomeWork23 extends BaseTest {
     @Test
     public void renamePlaylist() throws InterruptedException {
         String playlistName = "Test Edited Playlist";
-        LoginPage loginPage = new LoginPage(getDriver());
-        HomePage homePage = new HomePage(getDriver());
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        HomePage homePage = new HomePage(getThreadLocal());
 
-        loginPage.login();
+        loginPage.provideLoginSucceed();
 
-        homePage.doubleClickChoosePlaylist()
+        homePage.chooseFirstPlaylist()
                 .enterNewPlaylistName(playlistName);
 
-        Assert.assertEquals (homePage.getPlaylistName(), playlistName);
+        Assert.assertEquals (homePage.notificationText(), playlistName);
 
     }
 

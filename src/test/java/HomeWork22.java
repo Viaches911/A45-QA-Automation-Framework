@@ -10,12 +10,13 @@ public class HomeWork22 extends BaseTest {
     public void renamePlaylist() {
         String playlistName = "Test Edited Playlist";
 
-        LoginPage loginPage = new LoginPage(getDriver());
-        HomePage homePage = new HomePage(getDriver());
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        HomePage homePage = new HomePage(getThreadLocal());
 
-        loginPage.login();
-        homePage.doubleClickChoosePlaylist();
-        homePage.enterNewPlaylistName(playlistName);
+        loginPage.provideLoginSucceed();
+
+        homePage.chooseFirstPlaylist()
+                .enterNewPlaylistName(playlistName);
 //        Assert.assertTrue(homePage.getPlaylistName(); we disable this method in Home Page
     }
 

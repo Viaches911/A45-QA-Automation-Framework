@@ -6,8 +6,8 @@ public class HomeWork15 extends BaseTest {
     public void LoginEmptyEmailPasswordTest() {
 
         String url = "https://testpro.io/";
-        getDriver().get(url);
-        Assert.assertEquals(getDriver().getCurrentUrl(), url);
-        getDriver().quit();
+        getThreadLocal().get(url);
+        Assert.assertEquals(getThreadLocal().getCurrentUrl(), url);
+        getThreadLocal().quit();
     }
 }

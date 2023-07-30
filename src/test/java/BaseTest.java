@@ -23,60 +23,40 @@ import java.util.List;
 import java.util.UUID;
 
 public class BaseTest {
-    public static WebDriver driver = null;
-    public ThreadLocal<WebDriver> threadDriver = null;
+    public static final ThreadLocal<WebDriver> THREAD_LOCAL = new ThreadLocal<>();
+    /**
+     * THREAD_LOCAL типа ThreadLocal<WebDriver>. ThreadLocal - это механизм, позволяющий сохранять и получать уникальные
+     * значения переменных для каждого потока. В данном случае,
+     * ThreadLocal<WebDriver> будет использоваться для хранения экземпляра WebDriver,
+     * связанного с каждым потоком во время выполнения тестов.
+     */
+    private static WebDriver driver = null;
+    /**
+     * Здесь объявляется переменная driver типа WebDriver и инициализируется значением null.
+     * По умолчанию, driver не имеет ссылки на экземпляр WebDriver.
+     */
+    private int timeSeconds = 3;
+    /*
+    Эта строка объявляет переменную timeSeconds типа int и инициализирует ее значением 3.
+    Данная переменная представляет количество секунд, используемых в коде для задания временных интервалов, например, ожидания элементов или таймаутов.
+*/
+    public static WebDriver getThreadLocal() {
+    return THREAD_LOCAL.get();
+}
+    //    Этот метод getThreadLocal() возвращает текущий экземпляр WebDriver, связанный с текущим потоком.
     public static WebDriverWait wait = null;
     public static Actions actions = null;
     public static String url = "";
 
-    @BeforeSuite
-    static void setupClass() {
-
-//       WebDriverManager.chromedriver().setup();
-//        WebDriverManager.firefoxdriver().setup();
-
-    }
-
-    @DataProvider(name="IncorrectLoginData")
-    public static Object[][] getDataFromDataProviders() {
-
-        return new Object[][] {
-                {"invalid@mail.com", "invalidPass"},
-                {"demo@class.com", ""},
-                {"", ""}
-        };
-    }
     @BeforeMethod
-    @Parameters({"BaseURL"})
-    public void launchBrowser(String BaseURL) throws MalformedURLException {
-        //      Added ChromeOptions argument below to fix websocket error
-//       ChromeOptions options = new ChromeOptions();
-//       options.addArguments("--remote-allow-origins=*");
-//       driver = new ChromeDriver(options);
+    @Parameters({"baseURL"})
+    public void setUpBrowser(@Optional String baseURL) throws MalformedURLException {
+        THREAD_LOCAL.set(pickBrowser(System.getProperty("browser")));
+        THREAD_LOCAL.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(timeSeconds));
+        getThreadLocal().get(baseURL);
+        System.out.println(
+                "Browser setup by Thread " + Thread.currentThread().getId() + " and Driver reference is : " + getThreadLocal());
 
-//        driver = new FirefoxDriver();
-
-        threadDriver = new ThreadLocal<>();// make sure to have this line before the assigning the driver variable
-        driver = pickBrowser(System.getProperty("browser"));
-        threadDriver.set(driver);
-
-        wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
-        actions = new Actions(getDriver());
-
-        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        url = BaseURL;
-        navigateToPage();
-    }
-
-    @AfterMethod//(enabled = false)
-    public void closeBrowser() {
-        getDriver().quit();
-        threadDriver.remove();
-    }
-
-    public WebDriver getDriver() {
-//        return driver;
-        return threadDriver.get();
     }
 
     public static WebDriver pickBrowser(String browser) throws MalformedURLException {
@@ -103,9 +83,10 @@ public class BaseTest {
                 return lambdaTest();
             default:
                 WebDriverManager.chromedriver().setup();
-                ChromeOptions options = new ChromeOptions();
-                options.addArguments("--remote-allow-origins=*");
-                return driver = new ChromeDriver(options);
+                ChromeOptions optionsChrome = new ChromeOptions();
+                optionsChrome.addArguments("--disable-notifications","--remote-allow-origins=*", "--incognito","--start-maximized");
+                optionsChrome.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
+                return driver = new ChromeDriver(optionsChrome);
         }
     }
 
@@ -127,6 +108,13 @@ public class BaseTest {
 
     return new RemoteWebDriver(new URL(hubURL), browserOptions);
     }
+
+    @AfterMethod
+    public void tearDown() {
+        THREAD_LOCAL.get().close();
+        THREAD_LOCAL.remove();
+    }
+
 
     public static void navigateToPage() {
         driver.get(url);

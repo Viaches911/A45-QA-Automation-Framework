@@ -12,11 +12,15 @@ public class LoginPage extends BasePage {
     private WebElement emailField;
     @FindBy(css = "[type='password']")
     private WebElement passwordField;
+    @FindBy(css = "a#hel")
+    private WebElement registrationLink;
+    @FindBy(css = ".fa-sign-out")
+    private WebElement logOutLocator;
 
     public LoginPage(WebDriver givenDriver) {
         super(givenDriver);
     }
-    public LoginPage clickSubmit() {
+    public LoginPage clickSubmitBtn() {
         submitButtonLocator.click();
         return this;
     }
@@ -28,10 +32,17 @@ public class LoginPage extends BasePage {
         passwordField.sendKeys(password);
         return this;
     }
-    public LoginPage login() {
+    public void provideLoginSucceed() {
         provideEmail("demo@class.com");
         providePassword("te$t$tudent");
-        clickSubmit();
+        clickSubmitBtn();
+    }
+    public  WebElement getRegistrationLink() {
+        return registrationLink;
+    }
+
+    public LoginPage clicklogOut() {
+        logOutLocator.click();
         return this;
     }
 }
