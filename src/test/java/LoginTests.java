@@ -51,7 +51,7 @@ public class LoginTests extends BaseTest {
         LoginPage loginPage = new LoginPage(getThreadLocal());
 
         // WHEN
-        loginPage.provideEmail("demo@class.com")
+        loginPage.provideEmail("tema@class.com")
                 .providePassword("te$t$tudent")
                 .clickSubmitBtn();
 
