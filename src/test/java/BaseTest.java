@@ -36,7 +36,7 @@ public class BaseTest {
      * Здесь объявляется переменная driver типа WebDriver и инициализируется значением null.
      * По умолчанию, driver не имеет ссылки на экземпляр WebDriver.
      */
-    private int timeSeconds = 3;
+//    private int timeSeconds = 3;
     /*
     Эта строка объявляет переменную timeSeconds типа int и инициализирует ее значением 3.
     Данная переменная представляет количество секунд, используемых в коде для задания временных интервалов, например, ожидания элементов или таймаутов.
@@ -53,7 +53,7 @@ public class BaseTest {
     @Parameters({"baseURL"})
     public void setUpBrowser(@Optional String baseURL) throws MalformedURLException {
         THREAD_LOCAL.set(pickBrowser(System.getProperty("browser")));
-        THREAD_LOCAL.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(timeSeconds));
+        THREAD_LOCAL.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         getThreadLocal().get(baseURL);
         System.out.println(
                 "Browser setup by Thread " + Thread.currentThread().getId() + " and Driver reference is : " + getThreadLocal());
