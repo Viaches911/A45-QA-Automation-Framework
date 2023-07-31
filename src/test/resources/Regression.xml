@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="TestNG" parallel="methods" thread-count="4">
+    <!--    Здесь создается элемент <suite>, который представляет собой контейнер для тестовых наборов. -->
+    <!--    Он имеет атрибуты name (имя набора), parallel (режим параллельного выполнения тестов) -->
+    <!--    и thread-count (количество потоков для параллельного выполнения).-->
+    <test name="Example Test" preserve-order="false">
+        <parameter name="baseURL" value="https://qa.koel.app/"/>
+        <classes>
+            <class name="LoginTests"/>
+            <class name="ProfileTests"/>
+            <class name="RandomTests"/>
+        </classes>
+    </test>
+</suite>
+        <!--        XML-файл определяет тестовый набор  (LoginTests) и параметром baseURL. -->
+        <!--        Когда вы запустите этот файл с использованием TestNG, будут запущены тесты из указанных класса, -->
+        <!--        и класс будет иметь доступ к параметру baseURL.-->
