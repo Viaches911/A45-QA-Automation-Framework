@@ -1,16 +1,16 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.LoginPage;
 
 public class HomeWork17 extends BaseTest {
     @Test
     public void addSongToPlaylist() throws InterruptedException {
 
         String newSongAddedNotificationText = "Added 1 song into";
-
-        navigateToPage();
-        provideEmail("viacheslav.dzhilov@testpro.io");
-        providePassword("te$t$tudent");
-        clickSubmit();
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        loginPage.provideEmail("viacheslav.dzhilov@testpro.io")
+                .providePassword("te$t$tudent")
+                .clickSubmitBtn();
         searchSong("Pluto");
         clickViewAllBtn();
         selectFirstSongResult();

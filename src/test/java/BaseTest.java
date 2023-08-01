@@ -24,14 +24,14 @@ import java.util.List;
 import java.util.UUID;
 
 public class BaseTest {
-    public static final ThreadLocal<WebDriver> THREAD_LOCAL = new ThreadLocal<>();
+    public static ThreadLocal<WebDriver> THREAD_LOCAL = new ThreadLocal<>();
     /**
      * THREAD_LOCAL типа ThreadLocal<WebDriver>. ThreadLocal - это механизм, позволяющий сохранять и получать уникальные
      * значения переменных для каждого потока. В данном случае,
      * ThreadLocal<WebDriver> будет использоваться для хранения экземпляра WebDriver,
      * связанного с каждым потоком во время выполнения тестов.
      */
-    private static WebDriver driver = null;
+    public  WebDriver driver = null;
     /**
      * Здесь объявляется переменная driver типа WebDriver и инициализируется значением null.
      * По умолчанию, driver не имеет ссылки на экземпляр WebDriver.
@@ -45,9 +45,9 @@ public class BaseTest {
     return THREAD_LOCAL.get();
 }
     //    Этот метод getThreadLocal() возвращает текущий экземпляр WebDriver, связанный с текущим потоком.
-    public static WebDriverWait wait = null;
-    public static Actions actions = null;
-    public static String url = "";
+    public WebDriverWait wait = null;
+    public Actions actions = null;
+    public String url = "";
 
     @BeforeMethod
     @Parameters({"baseURL"})
@@ -132,39 +132,39 @@ public class BaseTest {
 */
 
 
-    public static void navigateToPage() {
-        driver.get(url);
+    public void navigateToPage() {
+        getThreadLocal().get(url);
     }
 
-    public static void provideEmail(String email) {
+    public void provideEmail(String email) {
         WebElement emailField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='email']")));
         emailField.clear();
         emailField.sendKeys(email);
     }
 
-    public static void providePassword(String password) {
+    public void providePassword(String password) {
         WebElement passwordField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='password']")));
         passwordField.clear();
         passwordField.sendKeys(password);
     }
 
-    public static void clickSubmit() {
+    public void clickSubmit() {
         WebElement submit = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button[type='submit']")));
         submit.click();
     }
 
-    public static void clickSaveButton() {
+    public void clickSaveButton() {
         WebElement saveButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button.btn-submit")));
         saveButton.click();
     }
 
-    public static void provideProfileName(String randomName) {
+    public void provideProfileName(String randomName) {
         WebElement profileName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name='name']")));
         profileName.clear();
         profileName.sendKeys(randomName);
     }
 
-    public static void provideCurrentPassword(String password) {
+    public void provideCurrentPassword(String password) {
         WebElement currentPassword = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name='current_password']")));
         currentPassword.clear();
         currentPassword.sendKeys(password);
@@ -175,7 +175,7 @@ public class BaseTest {
         return UUID.randomUUID().toString().replace("-", "");
     }
 
-    public static void clickAvatarIcon() {
+    public void clickAvatarIcon() {
         WebElement avatarIcon = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("img.avatar")));
         avatarIcon.click();
     }
@@ -274,9 +274,8 @@ public class BaseTest {
     }
 
     public void clickDeletePlaylistBtn() throws InterruptedException {
-        WebElement deletePlaylist = driver.findElement(By.cssSelector(".btn-delete-playlist"));
+        WebElement deletePlaylist = getThreadLocal().findElement(By.cssSelector(".btn-delete-playlist"));
         deletePlaylist.click();
-        Thread.sleep(2000);
     }
 
     public String getDeletedPlaylistMsg() {

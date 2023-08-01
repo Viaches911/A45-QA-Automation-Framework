@@ -8,6 +8,5 @@ public class HomeWork15 extends BaseTest {
         String url = "https://testpro.io/";
         getThreadLocal().get(url);
         Assert.assertEquals(getThreadLocal().getCurrentUrl(), url);
-        getThreadLocal().quit();
     }
 }

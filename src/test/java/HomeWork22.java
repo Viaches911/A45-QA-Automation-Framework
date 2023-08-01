@@ -3,7 +3,7 @@ import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
 
-public class HomeWork22 extends BaseTest {
+public class HomeWork22 extends BaseTest { //failed
     // For Homework 22 I used code from Homework 21 (renamePlaylist) for refactoring and implementation
     //Prerequisite - at least one created playlist by user
     @Test
@@ -13,11 +13,13 @@ public class HomeWork22 extends BaseTest {
         LoginPage loginPage = new LoginPage(getThreadLocal());
         HomePage homePage = new HomePage(getThreadLocal());
 
-        loginPage.provideLoginSucceed();
+        loginPage.provideEmail("viacheslav.dzhilov@testpro.io")
+                .providePassword("te$t$tudent")
+                .clickSubmitBtn();
 
         homePage.chooseFirstPlaylist()
                 .enterNewPlaylistName(playlistName);
-//        Assert.assertTrue(homePage.getPlaylistName(); we disable this method in Home Page
+        Assert.assertEquals (homePage.notificationText(), playlistName);
     }
 
 }

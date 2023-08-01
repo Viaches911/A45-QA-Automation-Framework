@@ -43,9 +43,8 @@ public class HomePage extends BasePage {
         return this;
     }
 
-    public HomePage deletePlaylist() {
+    public void deletePlaylist() {
         deletePlaylistBtn.click();
-        return this;
     }
 
     public boolean notificationText() {

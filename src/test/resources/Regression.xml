@@ -8,7 +8,10 @@
         <parameter name="baseURL" value="https://qa.koel.app/"/>
         <classes>
             <class name="LoginTests"/>
+            <class name="HomeWork15"/>
             <class name="HomeWork16"/>
+            <class name="HomeWork17"/>
+            <class name="HomeWork18"/>
         </classes>
     </test>
 </suite>

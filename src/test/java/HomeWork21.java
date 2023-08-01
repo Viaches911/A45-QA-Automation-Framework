@@ -4,17 +4,20 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.LoginPage;
 
-public class HomeWork21 extends BaseTest {
+public class HomeWork21 extends BaseTest { //test failed
+
+    String newPlaylistName = "Test Edited Playlist";
 
     //Prerequisite - at least one created playlist by user
-    String newPlaylistName = "Test Edited Playlist";
 
     @Test
     public void renamePlaylist() {
-        provideEmail("viacheslav.dzhilov@testpro.io");
-        providePassword("te$t$tudent");
-        clickSubmit();
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        loginPage.provideEmail("viacheslav.dzhilov@testpro.io")
+                .providePassword("te$t$tudent")
+                .clickSubmitBtn();
         doubleClickPlaylist();
         enterNewPlaylistName();
         Assert.assertTrue(doesPlaylistExist());
