@@ -9,11 +9,13 @@ import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import pages.LoginPage;
 
 import java.time.Duration;
 
@@ -62,4 +64,48 @@ public class LoginStepDefinitions {
     public void userIsLoggedIn() {
         Assert.assertTrue(wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img.avatar"))).isDisplayed());
     }
-}
+
+    @Then("I am logged out")
+    public void userIsLoggedOut() {
+
+    }
+
+    @And ("I click play button")
+    public void clickPlay() {
+        WebElement playNextButton = driver.findElement(By.xpath("//i[@data-testid='play-next-btn']"));
+        WebElement playButton = driver.findElement(By.xpath("//span[@data-testid='play-btn']"));
+
+        playNextButton.click();
+        playButton.click();
+    }
+    @Then(("Song is playing"))
+    public boolean isSongPlaying() {
+        WebElement soundBar = driver.findElement(By.xpath("//div[@data-testid='sound-bar-play']"));
+        return soundBar.isDisplayed();
+        }
+
+    }
+
+
+
+/* Page Objects! We can just reuse our page objects
+
+   @When("I enter email {string}")
+   public void enterEmail(String email) {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.provideEmail(email)
+    }
+
+    @When("I enter password {string}")
+    public void enterPassword(String password) {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.providePassword("password")
+    }
+
+     @And("I submit")
+     public void submit() {
+         LoginPage loginPage = new LoginPage(driver);
+         loginPage.clickSubmitBtn();
+     }
+
+   */
