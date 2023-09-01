@@ -71,4 +71,11 @@ public class LoginTests extends BaseTest {
         // THEN
         Assert.assertTrue(homePage.getUserAvatar());
     }
+    @Test
+    public void LoginEmptyEmailPasswordTestWithWebsiteChanging() {  //passed
+
+        String url = "https://testpro.io/";
+        getThreadLocal().get(url);
+        Assert.assertEquals(getThreadLocal().getCurrentUrl(), url);
+    }
 }

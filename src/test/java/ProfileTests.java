@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 public class ProfileTests extends BaseTest {
 
     @Test
-    public void changeProfileNameTest () throws InterruptedException {
+    public void changeProfileNameTest () throws InterruptedException { //need review
 
         navigateToPage();
 
