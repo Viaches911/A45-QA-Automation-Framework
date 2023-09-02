@@ -45,9 +45,9 @@ public class BaseTest {
     return THREAD_LOCAL.get();
 }
     //    Этот метод getThreadLocal() возвращает текущий экземпляр WebDriver, связанный с текущим потоком.
-    public  WebDriverWait wait = null;
-    public Actions actions = new Actions(driver);
-    public String url = "";
+    static WebDriverWait wait;
+    Actions actions;
+    static String url;
 
     @BeforeMethod
     @Parameters({"baseURL"})
@@ -210,7 +210,7 @@ public class BaseTest {
 
     // double click
     public void doubleClickChoosePlaylist() {
-        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(3)")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(3)")));
         // double click
         WebElement playlist = driver.findElement(By.cssSelector(".playlist:nth-child(3)"));
         actions.doubleClick(playlist).perform();

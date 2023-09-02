@@ -5,19 +5,6 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 
 public class RandomTests extends BaseTest {
-
-    @Test
-    public void actionMethods() { //need review
-        LoginPage loginPage = new LoginPage(getThreadLocal());
-        loginPage.provideEmail("demo@class.com")
-                .providePassword("te$t$tudent")
-                .clickSubmitBtn();
-        doubleClickChoosePlaylist();
-
-//        hoverPlay();
-//        contextClickFirstSong();
-    }
-
     @Test
     public void listOfSongsWebElements() {
         LoginPage loginPage = new LoginPage(getThreadLocal());

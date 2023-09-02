@@ -18,7 +18,7 @@ public class HomeWork22 extends BaseTest { //failed
                 .clickSubmitBtn();
 
         homePage.chooseFirstPlaylist()
-                .enterNewPlaylistName(playlistName);
+                .enterNewPlaylistName(playlistName); //need find right css locator !!!
         Assert.assertEquals (homePage.notificationText(), playlistName);
     }
 
