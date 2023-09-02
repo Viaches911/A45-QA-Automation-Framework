@@ -12,7 +12,7 @@ public class LoginPage extends BasePage {
     private WebElement emailField;
     @FindBy(css = "[type='password']")
     private WebElement passwordField;
-    @FindBy(css = "a#hel")
+    @FindBy(css = "a[href*='registration']")
     private WebElement registrationLink;
     @FindBy(css = ".fa-sign-out")
     private WebElement logOutLocator;

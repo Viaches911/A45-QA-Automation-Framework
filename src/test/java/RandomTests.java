@@ -27,7 +27,7 @@ public class RandomTests extends BaseTest {
     @Test
     public void registrationNavigation()  { //passed
 
-        WebElement registrationLink = getThreadLocal().findElement(By.xpath("//*[@id=\"app\"]/div/div/form/div[2]/a"));
+        WebElement registrationLink = getThreadLocal().findElement(By.cssSelector("a[href*='registration']"));
         registrationLink.click();
 
         String registrationUrl = "https://qa.koel.app/registration";
