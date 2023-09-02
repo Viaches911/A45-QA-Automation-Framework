@@ -8,9 +8,10 @@ public class RandomTests extends BaseTest {
 
     @Test
     public void actionMethods() { //need review
-        provideEmail("demo@class.com");
-        providePassword("te$t$tudent");
-        clickSubmit();
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        loginPage.provideEmail("demo@class.com")
+                .providePassword("te$t$tudent")
+                .clickSubmitBtn();
         doubleClickChoosePlaylist();
 
 //        hoverPlay();
@@ -18,14 +19,15 @@ public class RandomTests extends BaseTest {
     }
 
     @Test
-    public void listOfSongsWebElements() { //need review
-        provideEmail("demo@class.com");
-        providePassword("te$t$tudent");
-        clickSubmit();
+    public void listOfSongsWebElements() {
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        loginPage.provideEmail("demo@class.com")
+                .providePassword("te$t$tudent")
+                .clickSubmitBtn();
         displayAllSongs();
     }
     @Test
-    public void registrationNavigation()  { //passed
+    public void registrationNavigation()  {
 
         WebElement registrationLink = getThreadLocal().findElement(By.cssSelector("a[href*='registration']"));
         registrationLink.click();
@@ -36,7 +38,7 @@ public class RandomTests extends BaseTest {
     }
 
     @Test
-    public void playASongTest(){ //passed
+    public void playASongTest(){
         LoginPage loginPage = new LoginPage(getThreadLocal());
         loginPage.provideEmail("demo@class.com")
                 .providePassword("te$t$tudent")

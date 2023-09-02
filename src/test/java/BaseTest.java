@@ -45,8 +45,8 @@ public class BaseTest {
     return THREAD_LOCAL.get();
 }
     //    Этот метод getThreadLocal() возвращает текущий экземпляр WebDriver, связанный с текущим потоком.
-    public WebDriverWait wait = null;
-    public Actions actions = null;
+    public  WebDriverWait wait = null;
+    public Actions actions = new Actions(driver);
     public String url = "";
 
     @BeforeMethod
@@ -189,7 +189,7 @@ public class BaseTest {
 
     // context click
     public void chooseAllSongsList() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("li a.songs")));
+        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("li a.songs")));
         driver.findElement(By.cssSelector("li a.songs")).click();
     }
 
@@ -203,14 +203,14 @@ public class BaseTest {
     public void displayAllSongs() {
         chooseAllSongsList();
     //add assertion
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".all-songs tr.song-item")));
+       // wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".all-songs tr.song-item")));
         List<WebElement> songsList = driver.findElements(By.cssSelector(".all-songs tr.song-item"));
         Assert.assertEquals(songsList.size(), 63);
     }
 
     // double click
     public void doubleClickChoosePlaylist() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(3)")));
+        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(3)")));
         // double click
         WebElement playlist = driver.findElement(By.cssSelector(".playlist:nth-child(3)"));
         actions.doubleClick(playlist).perform();
