@@ -69,7 +69,7 @@ public class BaseTest {
 //        String gridURL = "http://10.2.127.17:4444";
         ChromeOptions optionsChrome = new ChromeOptions();
         optionsChrome.addArguments("--disable-notifications","--remote-allow-origins=*", "--incognito","--start-maximized");
-//        optionsChrome.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
+//      optionsChrome.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
 
             //        switch (browser) {
 //        case "firefox":
