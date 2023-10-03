@@ -6,7 +6,7 @@
         <classes>
             <class name="PlaylistTests">
                 <methods>
-                    <include name="renamePlaylist"/>
+                    <include name="deletePlaylist"/>
                 </methods>
             </class>
         </classes>
