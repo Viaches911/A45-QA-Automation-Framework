@@ -8,7 +8,8 @@
         <parameter name="baseURL" value="https://qa.koel.app/"/>
         <classes>
             <class name="LoginTests"/>
-            <class name="RandomTests"/>
+<!--            <class name="ProfileTests"/>-->
+<!--            <class name="RandomTests"/>-->
         </classes>
     </test>
 </suite>

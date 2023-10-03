@@ -1,55 +1,67 @@
 package pages;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class HomePage extends BasePage {
-
-    @FindBy(css = ".avatar")
-    private WebElement userAvatarIcon;
-    @FindBy(css = ".playlist:nth-child(3)")
-    private WebElement firstPlaylist;
-    @FindBy(css = "input[name='name']")
-    private WebElement playlistNameField;
-    @FindBy(css = ".fa-plus-circle")
-    private WebElement addNewPlaylist;
-    @FindBy(css = ".btn-delete-playlist")
-    private WebElement deletePlaylistBtn;
-    @FindBy(css = ".show.success")
-    private WebElement popUpNotification;
-    @FindBy(css = ".songs")
-    private WebElement allSongs;
-    @FindBy(css = "[data-testid='playlist-context-menu-create-simple']")
-    private WebElement chooseCreateNewPlaylist;
+    String playlistName = "TestPro Edited Playlist";
+    private By locator;
 
     public HomePage(WebDriver givenDriver) {
         super(givenDriver);
     }
 
-    public boolean getUserAvatar() {
-        return userAvatarIcon.isEnabled();
+    // Web element annotations
+    @FindBy(css ="img.avatar")
+    private WebElement userAvatarIcon;
+    @FindBy(css = ".playlist:nth-child(3)")
+    private WebElement firstPlaylist;
+    @FindBy(css = "[name = 'name']")
+    private WebElement playlistNameField;
+
+    //    Methods
+    public WebElement getUserAvatar() {
+        return userAvatarIcon;
+    }
+    public WebElement getFirstPlaylist() {
+        return firstPlaylist;
+    }
+    public WebElement getPlaylistNameField() {
+        return playlistNameField;
+    }
+    public void clickAvatarIcon() {
+        userAvatarIcon.click();
+    }
+    public void enterNewPlaylistName() {
+        WebElement playlistInputField = driver.findElement(By.cssSelector("input[name='name']"));
+        playlistInputField.sendKeys((Keys.chord(Keys.CONTROL, "a", Keys.BACK_SPACE)));
+        playlistInputField.sendKeys(playlistName);
+        playlistInputField.sendKeys(Keys.ENTER);
     }
 
-    public HomePage chooseFirstPlaylist() {
-        firstPlaylist.click();
-        return this;
+    public boolean doesPlaylistExist() {
+        WebElement playlistElement = driver.findElement(By.xpath("//a[text()='" + playlistName + "']"));
+        return playlistElement.isDisplayed();
+
     }
-    public HomePage enterNewPlaylistName(String playlistName) {
-        playlistNameField.sendKeys(playlistName);
-        playlistNameField.sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.BACK_SPACE));
-        playlistNameField.sendKeys(playlistName);
-        playlistNameField.sendKeys(Keys.ENTER);
-        return this;
+
+    public void openPlaylist() {
+        WebElement emptyPlaylist = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".playlist:nth-child(3)")));
+        emptyPlaylist.click();
+
     }
 
     public void deletePlaylist() {
-        deletePlaylistBtn.click();
+        WebElement deletePlaylistButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".btn-delete-playlist")));
+        deletePlaylistButton.click();
+
     }
 
-    public boolean notificationText() {
-        findElement(popUpNotification);
-        return popUpNotification.isDisplayed();
+    public void doubleClickPlaylist() {
+        actions.doubleClick(findElement((WebElement) locator)).perform();
     }
 
 }

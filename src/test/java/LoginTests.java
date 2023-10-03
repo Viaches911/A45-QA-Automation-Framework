@@ -1,81 +1,56 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
 
 public class LoginTests extends BaseTest {
-    @Test
-    public static void loginEmptyEmailPasswordTest() {
-        // GIVEN
-        LoginPage loginPage = new LoginPage(getThreadLocal());
 
-        // WHEN
-        loginPage.provideEmail("")
-                .providePassword("te$t$tudent")
-                .clickSubmitBtn();
+    @Test (dataProvider = "IncorrectLoginData", dataProviderClass = BaseTest.class, enabled = true, priority = 0, description = "Login with invalid email and valid password")
+    public void loginInvalidEmailValidPasswordTest(String username, String password){
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.provideEmail(username);
+        loginPage.providePassword(password);
+        loginPage.clickSubmitBtn();
 
-        Assert.assertTrue(loginPage.getRegistrationLink().isDisplayed());
+        Assert.assertEquals(driver.getCurrentUrl(), url); // https://qa.koel.app/
     }
 
-    @Test
-    public static void loginWrongPasswordTest() {
-        // GIVEN
-        LoginPage loginPage = new LoginPage(getThreadLocal());
-
-        // WHEN
-        loginPage.provideEmail("demo@class.com")
-                .providePassword("te$t123")
-                .clickSubmitBtn();
-
-        // THEN
-        Assert.assertTrue(loginPage.getRegistrationLink().isDisplayed());
+    @Test (enabled = true, priority = 1, description = "Login with valid email and valid password")
+    public void loginValidEmailPasswordTest(){
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.provideEmail("demo@class.com");
+        loginPage.providePassword("te$t$tudent");
+        loginPage.clickSubmitBtn();
+        isAvatarDisplayed();
     }
 
-    @Test
-    public static void loginEmptyPasswordTest() {
-        // GIVEN
-        LoginPage loginPage = new LoginPage(getThreadLocal());
+    @Test (enabled = true, priority = 3, description = "Login with valid email and empty password")
+    public void loginValidEmailEmptyPasswordTest() {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.provideEmail("demo@class.com");
+        loginPage.providePassword("");
+        loginPage.clickSubmitBtn();
 
-        // WHEN
-        loginPage.provideEmail("demo@class.com")
-                .providePassword("")
-                .clickSubmitBtn();
-
-        // THEN
-        Assert.assertTrue(loginPage.getRegistrationLink().isDisplayed());
+        Assert.assertEquals(driver.getCurrentUrl(), url); //https://qa.koel.app/
+    }
+    public void isAvatarDisplayed() {
+        WebElement avatarIcon = driver.findElement(By.cssSelector("img[class='avatar']"));
+        Assert.assertTrue(avatarIcon.isDisplayed());
+//        Assert.assertEquals(avatarIcon.isDisplayed(), true);
     }
 
+    //Page Object Model example
     @Test
-    public static void loginWrongEmailTest() {
-        // GIVEN
-        LoginPage loginPage = new LoginPage(getThreadLocal());
+    public void LoginValidEmailPasswordTest () {
 
-        // WHEN
-        loginPage.provideEmail("tema@class.com")
-                .providePassword("te$t$tudent")
-                .clickSubmitBtn();
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
 
-        // THEN
-        Assert.assertTrue(loginPage.getRegistrationLink().isDisplayed());
-    }
-
-    @Test
-    public void loginSucceedTest() {
-        // GIVEN
-        LoginPage loginPage = new LoginPage(getThreadLocal());
-        HomePage homePage = new HomePage(getThreadLocal());
-
-        // WHEN
         loginPage.provideLoginSucceed();
 
-        // THEN
-        Assert.assertTrue(homePage.getUserAvatar());
-    }
-    @Test
-    public void LoginEmptyEmailPasswordTestWithWebsiteChanging() {
+        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
 
-        String url = "https://testpro.io/";
-        getThreadLocal().get(url);
-        Assert.assertEquals(getThreadLocal().getCurrentUrl(), url);
-    }
+    };
 }

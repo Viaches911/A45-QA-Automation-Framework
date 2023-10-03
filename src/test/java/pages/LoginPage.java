@@ -5,31 +5,32 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends BasePage {
-
-    @FindBy(css = "[type='submit']")
-    private WebElement submitButtonLocator;
+    public LoginPage(WebDriver givenDriver) {
+        super(givenDriver);
+    }
+    //Web element annotations
     @FindBy(css = "[type='email']")
     private WebElement emailField;
     @FindBy(css = "[type='password']")
     private WebElement passwordField;
+    @FindBy(css = "[type='submit']")
+    private WebElement submitButtonLocator;
     @FindBy(css = "a[href*='registration']")
     private WebElement registrationLink;
     @FindBy(css = ".fa-sign-out")
     private WebElement logOutLocator;
 
-    public LoginPage(WebDriver givenDriver) {
-        super(givenDriver);
-    }
-    public LoginPage clickSubmitBtn() {
-        submitButtonLocator.click();
-        return this;
-    }
+    //Methods for interaction
     public LoginPage provideEmail(String email) {
         emailField.sendKeys(email);
         return this;
     }
     public LoginPage providePassword(String password) {
         passwordField.sendKeys(password);
+        return this;
+    }
+    public LoginPage clickSubmitBtn() {
+        submitButtonLocator.click();
         return this;
     }
     public void provideLoginSucceed() {

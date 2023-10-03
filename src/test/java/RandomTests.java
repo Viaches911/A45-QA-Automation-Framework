@@ -7,7 +7,7 @@ import pages.LoginPage;
 public class RandomTests extends BaseTest {
     @Test
     public void listOfSongsWebElements() {
-        LoginPage loginPage = new LoginPage(getThreadLocal());
+        LoginPage loginPage = new LoginPage(driver);
         loginPage.provideEmail("demo@class.com")
                 .providePassword("te$t$tudent")
                 .clickSubmitBtn();
@@ -16,17 +16,17 @@ public class RandomTests extends BaseTest {
     @Test
     public void registrationNavigation()  {
 
-        WebElement registrationLink = getThreadLocal().findElement(By.cssSelector("a[href*='registration']"));
+        WebElement registrationLink = driver.findElement(By.cssSelector("a[href*='registration']"));
         registrationLink.click();
 
         String registrationUrl = "https://qa.koel.app/registration";
-        Assert.assertEquals(getThreadLocal().getCurrentUrl(), registrationUrl);
+        Assert.assertEquals(driver.getCurrentUrl(), registrationUrl);
 
     }
 
     @Test
     public void playASongTest(){
-        LoginPage loginPage = new LoginPage(getThreadLocal());
+        LoginPage loginPage = new LoginPage(driver);
         loginPage.provideEmail("demo@class.com")
                 .providePassword("te$t$tudent")
                 .clickSubmitBtn();
