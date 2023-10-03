@@ -1,5 +1,6 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -281,5 +282,25 @@ public class BaseTest {
     public String getDeletedPlaylistMsg() {
         WebElement notificationMsg = driver.findElement(By.cssSelector("div.success.show"));
         return notificationMsg.getText();
+    }
+    public void selectPlayList() {
+        WebElement selectPlayList = driver.findElement(By.xpath("//li[@class = 'playlist playlist']"));
+        selectPlayList.click();
+    }
+
+    public void deletePlaylistButton() {
+        WebElement deletePlaylistButton = driver.findElement(By.xpath("//button[@class ='del btn-delete-playlist']"));
+        deletePlaylistButton.click();
+    }
+
+    public void enterNewPlaylistName() {
+        WebElement playlistInputField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[name='name']")));
+        playlistInputField.sendKeys(Keys.chord(Keys.CONTROL,"a",Keys.BACK_SPACE));
+        playlistInputField.sendKeys("Tony1234");
+        playlistInputField.sendKeys(Keys.ENTER);
+    }
+    public boolean showSuccess() {
+        WebElement successShow = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='success show']")));
+        return successShow.isDisplayed();
     }
 }

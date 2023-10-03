@@ -5,47 +5,39 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends BasePage {
-    public LoginPage(WebDriver givenDriver) {
+
+    //locators
+
+    @FindBy(xpath = "//button[@type='submit']")
+    WebElement clickSubmitBtn;
+    @FindBy(xpath = "//input[@type='email']")
+    WebElement emailElement;
+    @FindBy(xpath = "//input[@type='password']" )
+    WebElement passwordElement;
+
+    //Before HW23:
+//    By clickSubmit = By.xpath("//button[@type='submit']");
+//    By provideEmail = By.xpath("//input[@type='email']");
+//    By providePassword = By.xpath("//input[@type='password']");
+
+    public LoginPage (WebDriver givenDriver){
         super(givenDriver);
     }
-    //Web element annotations
-    @FindBy(css = "[type='email']")
-    private WebElement emailField;
-    @FindBy(css = "[type='password']")
-    private WebElement passwordField;
-    @FindBy(css = "[type='submit']")
-    private WebElement submitButtonLocator;
-    @FindBy(css = "a[href*='registration']")
-    private WebElement registrationLink;
-    @FindBy(css = ".fa-sign-out")
-    private WebElement logOutLocator;
-
-    //Methods for interaction
-    public LoginPage provideEmail(String email) {
-        emailField.sendKeys(email);
+    public LoginPage clickSubmit (){
+        clickSubmitBtn.click();
         return this;
     }
-    public LoginPage providePassword(String password) {
-        passwordField.sendKeys(password);
+    public LoginPage provideEmail (String email){
+        emailElement.sendKeys(email);
         return this;
     }
-    public LoginPage clickSubmitBtn() {
-        submitButtonLocator.click();
+    public LoginPage providePassword (String password){
+        passwordElement.sendKeys(password);
         return this;
     }
-    public void provideLoginSucceed() {
-        provideEmail("demo@class.com");
-        providePassword("te$t$tudent");
-        clickSubmitBtn();
-    }
-    public  WebElement getRegistrationLink() {
-        return registrationLink;
-    }
-
-    public LoginPage clicklogOut() {
-        logOutLocator.click();
-        return this;
+    public void login(){
+        provideEmail("viacheslav.dzhilov@testpro.io")
+                .providePassword("te$t$tudent")
+                .clickSubmit();
     }
 }
-
-

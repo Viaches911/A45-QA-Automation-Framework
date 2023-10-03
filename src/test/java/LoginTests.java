@@ -12,7 +12,7 @@ public class LoginTests extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.provideEmail(username);
         loginPage.providePassword(password);
-        loginPage.clickSubmitBtn();
+        loginPage.clickSubmit();
 
         Assert.assertEquals(driver.getCurrentUrl(), url); // https://qa.koel.app/
     }
@@ -22,7 +22,7 @@ public class LoginTests extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.provideEmail("demo@class.com");
         loginPage.providePassword("te$t$tudent");
-        loginPage.clickSubmitBtn();
+        loginPage.clickSubmit();
         isAvatarDisplayed();
     }
 
@@ -31,7 +31,7 @@ public class LoginTests extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.provideEmail("demo@class.com");
         loginPage.providePassword("");
-        loginPage.clickSubmitBtn();
+        loginPage.clickSubmit();
 
         Assert.assertEquals(driver.getCurrentUrl(), url); //https://qa.koel.app/
     }
@@ -48,7 +48,7 @@ public class LoginTests extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
 
-        loginPage.provideLoginSucceed();
+        loginPage.login();
 
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
 

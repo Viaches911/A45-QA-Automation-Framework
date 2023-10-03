@@ -10,7 +10,7 @@ public class RandomTests extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.provideEmail("demo@class.com")
                 .providePassword("te$t$tudent")
-                .clickSubmitBtn();
+                .clickSubmit();
         displayAllSongs();
     }
     @Test
@@ -29,7 +29,7 @@ public class RandomTests extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.provideEmail("demo@class.com")
                 .providePassword("te$t$tudent")
-                .clickSubmitBtn();
+                .clickSubmit();
         clickPlay();
         Assert.assertTrue(isSongPlaying());
     }

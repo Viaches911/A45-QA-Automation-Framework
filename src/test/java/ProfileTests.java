@@ -15,7 +15,7 @@ public class ProfileTests extends BaseTest {
         HomePage homePage = new HomePage(driver);
 
        //Login
-        loginPage.provideLoginSucceed();
+        loginPage.login();
 
         //WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement avatarIcon = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img.avatar")));
