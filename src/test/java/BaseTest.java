@@ -243,7 +243,7 @@ public class BaseTest {
         addToBtn.click();
     }
 
-    public void choosePlaylist() throws InterruptedException {
+    public void choosePlaylist() {
         // We created a playlist named "Test Playlist"
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section[@id='songResultsWrapper']//li[contains(text(),'Test Playlist')]")));
         WebElement playlistElement = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//li[contains(text(),'Test Playlist')]"));
@@ -274,7 +274,8 @@ public class BaseTest {
         emptyPlaylist.click();
     }
 
-    public void clickDeletePlaylistBtn() throws InterruptedException {
+    public void clickDeletePlaylistBtn() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".btn-delete-playlist")));
         WebElement deletePlaylist = driver.findElement(By.cssSelector(".btn-delete-playlist"));
         deletePlaylist.click();
     }

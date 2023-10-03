@@ -8,7 +8,7 @@ import pages.LoginPage;
 
 public class PlaylistTests extends BaseTest {
     @Test
-    public void addSongToPlaylist() throws InterruptedException {
+    public void addSongToPlaylist() {
 
         String newSongAddedNotificationText = "Added 1 song into";
         LoginPage loginPage = new LoginPage(driver);
